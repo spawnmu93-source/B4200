@@ -14,6 +14,7 @@ import {
   CheckSquare,
   Square
 } from 'lucide-react';
+import { api } from '../services/api';
 
 export default function CampConfigurator() {
   const { t, i18n } = useTranslation();
@@ -99,18 +100,7 @@ export default function CampConfigurator() {
         language: i18n.language || 'es'
       };
 
-      const response = await fetch('/api/inquiries/camp', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Error al procesar la configuración');
-      }
-
+      const data = await api.submitCampInquiry(payload);
       setSuccessData(data);
     } catch (err) {
       setErrorMessage(err.message || (i18n.language.startsWith('es') ? 'Error de conexión con el servidor.' : 'Server connection error.'));

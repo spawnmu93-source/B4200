@@ -21,6 +21,7 @@ import {
   Filter
 } from 'lucide-react';
 import logoHorizontalWhite from '../assets/logo-horizontal-white.svg';
+import { api } from '../services/api';
 
 export default function AdminDashboard({ onClose }) {
   const [token, setToken] = useState(localStorage.getItem('base4200_admin_token') || '');
@@ -52,15 +53,7 @@ export default function AdminDashboard({ onClose }) {
     setLoginError('');
 
     try {
-      const res = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-      });
-
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Credenciales inválidas');
-
+      const data = await api.login(username, password);
       localStorage.setItem('base4200_admin_token', data.token);
       setToken(data.token);
     } catch (err) {
@@ -80,31 +73,16 @@ export default function AdminDashboard({ onClose }) {
     setLoading(true);
     try {
       // 1. Fetch Stats
-      const statsRes = await fetch('/api/admin/stats', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      if (statsRes.ok) {
-        setStats(await statsRes.json());
-      } else if (statsRes.status === 401) {
-        handleLogout();
-        return;
-      }
+      const statsData = await api.getStats(token);
+      setStats(statsData);
 
       // 2. Fetch Inquiries
-      const queryParams = new URLSearchParams();
-      if (statusFilter !== 'todas') queryParams.append('status', statusFilter);
-      if (searchTerm) queryParams.append('search', searchTerm);
-
-      const inqRes = await fetch(`/api/admin/inquiries?${queryParams.toString()}`, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      if (inqRes.ok) setInquiries(await inqRes.json());
+      const inqData = await api.getInquiries(token, { status: statusFilter, search: searchTerm });
+      setInquiries(inqData);
 
       // 3. Fetch Suppliers
-      const supRes = await fetch('/api/admin/suppliers', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      if (supRes.ok) setSuppliers(await supRes.json());
+      const supData = await api.getSuppliers(token);
+      setSuppliers(supData);
 
     } catch (err) {
       console.error('Error cargando datos administrativos:', err);
@@ -116,21 +94,14 @@ export default function AdminDashboard({ onClose }) {
   const handleStatusChange = async (inquiryId, newStatus) => {
     setUpdatingId(inquiryId);
     try {
-      const res = await fetch(`/api/admin/inquiries/${inquiryId}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({ status: newStatus })
-      });
-
-      if (res.ok) {
-        setInquiries(prev => prev.map(item => item.id === inquiryId ? { ...item, status: newStatus } : item));
-        if (selectedInquiry && selectedInquiry.id === inquiryId) {
-          setSelectedInquiry(prev => ({ ...prev, status: newStatus }));
-        }
+      await api.updateInquiryStatus(token, inquiryId, newStatus);
+      setInquiries(prev => prev.map(item => item.id === inquiryId ? { ...item, status: newStatus } : item));
+      if (selectedInquiry && selectedInquiry.id === inquiryId) {
+        setSelectedInquiry(prev => ({ ...prev, status: newStatus }));
       }
+      // Refresh stats
+      const updatedStats = await api.getStats(token);
+      setStats(updatedStats);
     } catch (err) {
       console.error('Error al actualizar estado:', err);
     } finally {
@@ -140,18 +111,11 @@ export default function AdminDashboard({ onClose }) {
 
   const handleSupplierStatusChange = async (supplierId, newStatus) => {
     try {
-      const res = await fetch(`/api/admin/suppliers/${supplierId}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify({ status: newStatus })
-      });
-
-      if (res.ok) {
-        setSuppliers(prev => prev.map(item => item.id === supplierId ? { ...item, status: newStatus } : item));
-      }
+      await api.updateSupplierStatus(token, supplierId, newStatus);
+      setSuppliers(prev => prev.map(item => item.id === supplierId ? { ...item, status: newStatus } : item));
+      // Refresh stats
+      const updatedStats = await api.getStats(token);
+      setStats(updatedStats);
     } catch (err) {
       console.error('Error al actualizar proveedor:', err);
     }

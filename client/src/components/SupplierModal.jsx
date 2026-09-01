@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { X, Send, CheckCircle, AlertCircle, Building2, Phone, Mail, Globe, MapPin, Tag } from 'lucide-react';
+import { api } from '../services/api';
 
 export default function SupplierModal({ isOpen, onClose }) {
   const { t } = useTranslation();
@@ -36,21 +37,10 @@ export default function SupplierModal({ isOpen, onClose }) {
     setErrorMsg('');
 
     try {
-      const response = await fetch('/api/inquiries/supplier', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Error al procesar la postulación');
-      }
-
+      await api.submitSupplierInquiry(formData);
       setSuccess(true);
     } catch (err) {
-      setErrorMsg(err.message || 'Error de conexión con el servidor.');
+      setErrorMsg(err.message || 'Error al procesar la postulación.');
     } finally {
       setLoading(false);
     }
