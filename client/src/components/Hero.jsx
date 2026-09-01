@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArrowRight, ChevronDown, Mountain, Compass, ShieldCheck } from 'lucide-react';
 import heroBg from '../assets/hero-bg-horizontal.png';
+import logoHorizontalWhite from '../assets/logo-horizontal-white.svg';
 
 export default function Hero() {
   const { t } = useTranslation();
@@ -24,24 +25,18 @@ export default function Hero() {
       {/* Content Container */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 text-center sm:text-left flex flex-col justify-center">
         
-        {/* Technical Badge with Chevrons */}
-        <div className="inline-flex items-center gap-3 self-center sm:self-start bg-[#202328]/90 border border-gray-700/80 px-3.5 py-1.5 rounded text-xs font-mono tracking-widest text-gray-300 uppercase backdrop-blur-sm mb-6 shadow-md">
-          <div className="chevron-indicator">
-            <span />
-            <span />
-            <span />
-          </div>
-          <span className="font-semibold text-white">{t('hero.elevation_badge')}</span>
+        {/* Large Prominent Vector Brand Logo */}
+        <div className="mb-6 self-center sm:self-start">
+          <img 
+            src={logoHorizontalWhite} 
+            alt="BASE 4.200 - Descanso a la Altura" 
+            className="w-full max-w-[340px] sm:max-w-[500px] md:max-w-[640px] lg:max-w-[760px] h-auto object-contain drop-shadow-[0_15px_35px_rgba(0,0,0,0.8)]"
+          />
         </div>
-
-        {/* Main Claim */}
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white uppercase font-display leading-[1.1] mb-4">
-          {t('hero.claim')}
-        </h1>
 
         {/* Conceptual Signature */}
         <div className="border-l-0 sm:border-l-4 sm:border-[#F3A801] sm:pl-4 mb-6">
-          <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#F3A801] uppercase tracking-wide">
+          <p className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#F3A801] uppercase tracking-wide font-display">
             {t('hero.tagline')}
           </p>
           <p className="text-sm sm:text-base text-gray-300 max-w-2xl mt-2 font-normal">
@@ -53,7 +48,7 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row items-center gap-4 mt-4 pt-2">
           <a
             href="#configurador"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#F3A801] hover:bg-[#DE9900] text-[#141619] font-bold text-xs sm:text-sm uppercase px-8 py-4 rounded shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-0.5 tracking-wider"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#F3A801] hover:bg-[#DE9900] text-[#141619] font-bold text-xs sm:text-sm uppercase px-8 py-4 rounded shadow-xl hover:shadow-2xl transition-all transform hover:-translate-y-0.5 tracking-wider font-mono"
           >
             <span>{t('hero.cta')}</span>
             <ArrowRight className="w-5 h-5" />
@@ -61,41 +56,41 @@ export default function Hero() {
 
           <a
             href="#soluciones"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#202328]/80 hover:bg-[#202328] border border-gray-700 text-white font-semibold text-xs sm:text-sm uppercase px-6 py-4 rounded transition-colors backdrop-blur-sm tracking-wider"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#202328]/80 hover:bg-[#202328] border border-gray-700 text-white font-semibold text-xs sm:text-sm uppercase px-6 py-4 rounded transition-colors backdrop-blur-sm tracking-wider font-mono"
           >
             <span>{t('hero.solutions_btn')}</span>
           </a>
         </div>
 
-        {/* Technical Highlights */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12 sm:mt-16 pt-8 border-t border-gray-800/80 max-w-4xl">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-[#202328] border border-gray-700 rounded text-[#F3A801]">
+        {/* Technical Highlights - 3 Blocks */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-12 sm:mt-16 pt-8 border-t border-gray-800/80 max-w-5xl">
+          <div className="flex items-center gap-3.5 bg-[#191B1F]/60 sm:bg-transparent p-3 sm:p-0 rounded-xl border sm:border-0 border-gray-800/60">
+            <div className="p-2.5 bg-[#202328] border border-gray-700 rounded-lg text-[#F3A801] shrink-0 shadow-md">
               <Mountain className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-xs uppercase font-bold tracking-wider text-gray-400">{t('hero.context_title')}</p>
-              <p className="text-sm font-semibold text-white">{t('hero.context_desc')}</p>
+              <p className="text-xs uppercase font-mono font-bold tracking-wider text-gray-400">{t('hero.context_title')}</p>
+              <p className="text-sm font-semibold text-white leading-snug">{t('hero.context_desc')}</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-[#202328] border border-gray-700 rounded text-[#F3A801]">
+          <div className="flex items-center gap-3.5 bg-[#191B1F]/60 sm:bg-transparent p-3 sm:p-0 rounded-xl border sm:border-0 border-gray-800/60">
+            <div className="p-2.5 bg-[#202328] border border-gray-700 rounded-lg text-[#F3A801] shrink-0 shadow-md">
               <Compass className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-xs uppercase font-bold tracking-wider text-gray-400">{t('hero.model_title')}</p>
-              <p className="text-sm font-semibold text-white">{t('hero.model_desc')}</p>
+              <p className="text-xs uppercase font-mono font-bold tracking-wider text-gray-400">{t('hero.model_title')}</p>
+              <p className="text-sm font-semibold text-white leading-snug">{t('hero.model_desc')}</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-[#202328] border border-gray-700 rounded text-[#F3A801]">
+          <div className="flex items-center gap-3.5 bg-[#191B1F]/60 sm:bg-transparent p-3 sm:p-0 rounded-xl border sm:border-0 border-gray-800/60">
+            <div className="p-2.5 bg-[#202328] border border-gray-700 rounded-lg text-[#F3A801] shrink-0 shadow-md">
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-xs uppercase font-bold tracking-wider text-gray-400">{t('hero.backing_title')}</p>
-              <p className="text-sm font-semibold text-white">{t('hero.backing_desc')}</p>
+              <p className="text-xs uppercase font-mono font-bold tracking-wider text-gray-400">{t('hero.backing_title')}</p>
+              <p className="text-sm font-semibold text-white leading-snug">{t('hero.backing_desc')}</p>
             </div>
           </div>
         </div>
