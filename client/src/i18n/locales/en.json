@@ -117,15 +117,14 @@
   "backing": {
     "badge": "CORPORATE ENDORSEMENT",
     "title": "A BUSINESS UNIT OF OBEMA",
-    "corp_subtitle": "INTEGRATED ENGINEERING & SERVICES",
-    "text": "OBEMA brings over a decade of track record, financial backing, technical solvency, and process engineering to BASE 4.200 operations. We ensure certified standards in high-demand environments.",
+    "text": "BASE 4.200 was born from OBEMA, integrating its experience, technical capability, and territory knowledge into remote camp development.",
     "button": "OBEMA OFFICIAL SITE →",
-    "p1_title": "Financial Solvency",
-    "p1_desc": "Capital strength and financial response",
-    "p2_title": "Process Engineering",
-    "p2_desc": "Certified quality protocols",
-    "p3_title": "Regional Footprint",
-    "p3_desc": "Operational bases across NOA and Cuyo"
+    "p1_title": "TRACK RECORD",
+    "p1_desc": "Experience and operational capacity",
+    "p2_title": "ENGINEERING & SERVICES",
+    "p2_desc": "Works · Logistics · Operations",
+    "p3_title": "REGIONAL FOOTPRINT",
+    "p3_desc": "La Rioja · NOA · Cuyo"
   },
   "partners": {
     "badge": "VALUE NETWORK",

@@ -18,31 +18,24 @@ import {
 export default function Solutions() {
   const { t } = useTranslation();
 
-  const p1Tags = t('solutions.p1_tags', { returnObjects: true }) || [];
-  const p2Tags = t('solutions.p2_tags', { returnObjects: true }) || [];
-  const p3Tags = t('solutions.p3_tags', { returnObjects: true }) || [];
-
   const primaryServices = [
     {
       number: '01',
       title: t('solutions.p1_title'),
       desc: t('solutions.p1_desc'),
-      icon: Home,
-      tags: Array.isArray(p1Tags) ? p1Tags : []
+      icon: Home
     },
     {
       number: '02',
       title: t('solutions.p2_title'),
       desc: t('solutions.p2_desc'),
-      icon: Utensils,
-      tags: Array.isArray(p2Tags) ? p2Tags : []
+      icon: Utensils
     },
     {
       number: '03',
       title: t('solutions.p3_title'),
       desc: t('solutions.p3_desc'),
-      icon: Sparkles,
-      tags: Array.isArray(p3Tags) ? p3Tags : []
+      icon: Sparkles
     }
   ];
 
@@ -110,19 +103,9 @@ export default function Solutions() {
                       {service.title}
                     </h3>
 
-                    <p className="text-xs sm:text-sm font-semibold text-[#F3A801] tracking-wider uppercase mb-6 leading-relaxed">
+                    <p className="text-xs sm:text-sm font-semibold text-[#F3A801] tracking-wider uppercase leading-relaxed">
                       {service.desc}
                     </p>
-                  </div>
-
-                  {/* Technical tags */}
-                  <div className="pt-5 border-t border-gray-800/80 space-y-2">
-                    {service.tags.map((tag, idx) => (
-                      <div key={idx} className="flex items-center gap-2.5 text-xs font-mono text-gray-300">
-                        <span className="w-1.5 h-1.5 bg-[#F3A801] rounded-full shrink-0" />
-                        <span>{tag}</span>
-                      </div>
-                    ))}
                   </div>
                 </div>
               );

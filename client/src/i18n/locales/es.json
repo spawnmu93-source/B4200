@@ -117,15 +117,14 @@
   "backing": {
     "badge": "RESPALDO CORPORATIVO",
     "title": "UNA UNIDAD DE NEGOCIOS DE OBEMA",
-    "corp_subtitle": "INGENIERÍA Y SERVICIOS INTEGRADOS",
-    "text": "OBEMA aporta más de una década de trayectoria, respaldo patrimonial, solvencia técnica e ingeniería de procesos a la operación de BASE 4.200. Garantizamos estándares certificados en entornos de alta exigencia.",
+    "text": "BASE 4.200 nace de OBEMA, integrando su experiencia, capacidad técnica y conocimiento del territorio al desarrollo de campamentos para operaciones remotas.",
     "button": "SITIO OFICIAL DE OBEMA →",
-    "p1_title": "Solvencia Patrimonial",
-    "p1_desc": "Capacidad de respuesta financiera",
-    "p2_title": "Ingeniería de Procesos",
-    "p2_desc": "Protocolos de calidad certificados",
-    "p3_title": "Presencia Regional",
-    "p3_desc": "Bases operativas en el NOA y Cuyo"
+    "p1_title": "TRAYECTORIA",
+    "p1_desc": "Experiencia y capacidad operativa",
+    "p2_title": "INGENIERÍA Y SERVICIOS",
+    "p2_desc": "Obras · Logística · Operaciones",
+    "p3_title": "PRESENCIA REGIONAL",
+    "p3_desc": "La Rioja · NOA · Cuyo"
   },
   "partners": {
     "badge": "RED DE VALOR",
