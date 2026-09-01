@@ -129,9 +129,7 @@
   "partners": {
     "badge": "RED DE VALOR",
     "title": "NUESTROS ALIADOS Y PROVEEDORES",
-    "description": "Trabajamos con una red homologada de proveedores especializados para asegurar suministros continuos y servicios críticos en zonas de alta montaña.",
-    "certified_badge": "RED HOMOLOGADA",
-    "audit_badge": "Auditoría de Calidad Aprobada",
+    "description": "Trabajamos con una red de proveedores especializados para asegurar suministros continuos y servicios críticos en zonas de alta montaña.",
     "categories": [
       {
         "title": "Logística y Transporte Minero",
@@ -156,7 +154,7 @@
   },
   "supplier_modal": {
     "title": "POSTULACIÓN DE PROVEEDOR",
-    "subtitle": "Sumate a la red de proveedores homologados para campamentos remotos.",
+    "subtitle": "Sumate a nuestra red de proveedores para campamentos remotos.",
     "company": "Empresa / Razón Social *",
     "category": "Rubro / Especialidad *",
     "category_ph": "Ej. Transporte pesado, Alimentos, Grupos electrógenos",

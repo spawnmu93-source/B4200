@@ -31,11 +31,11 @@ export default function App() {
         {/* 4. RESPALDO - OBEMA Endorsement Section (White) */}
         <BackingObema />
 
-        {/* 5. ALIADOS - Partners & Supplier Intake Section (Light Gray #F4F5F7) */}
-        <Partners />
-
-        {/* 6. CONFIGURÁ TU CAMPAMENTO - Conversion Form (Technical Black #141619) */}
+        {/* 5. CONFIGURÁ TU CAMPAMENTO - Conversion Form (Technical Black #141619) */}
         <CampConfigurator />
+
+        {/* 6. ALIADOS - Partners & Supplier Intake Section (Light Gray #F4F5F7) */}
+        <Partners />
       </main>
 
       {/* 7. CONTACTO & FOOTER */}

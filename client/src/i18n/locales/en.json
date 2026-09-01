@@ -129,9 +129,7 @@
   "partners": {
     "badge": "VALUE NETWORK",
     "title": "OUR PARTNERS AND SUPPLIERS",
-    "description": "We work with a certified network of specialized suppliers to ensure uninterrupted supply and critical services in high-altitude environments.",
-    "certified_badge": "CERTIFIED NETWORK",
-    "audit_badge": "Quality Audit Approved",
+    "description": "We work with a network of specialized suppliers to ensure uninterrupted supply and critical services in high-altitude environments.",
     "categories": [
       {
         "title": "Mining Logistics & Transport",
@@ -156,7 +154,7 @@
   },
   "supplier_modal": {
     "title": "SUPPLIER APPLICATION",
-    "subtitle": "Join our certified supplier network for remote camps.",
+    "subtitle": "Join our network of suppliers for remote camps.",
     "company": "Company / Legal Name *",
     "category": "Industry / Specialty *",
     "category_ph": "e.g. Heavy transport, Food supply, Power generation",

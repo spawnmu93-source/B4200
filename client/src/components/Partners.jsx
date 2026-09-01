@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Handshake, UserPlus, CheckCircle } from 'lucide-react';
+import { UserPlus } from 'lucide-react';
 import SupplierModal from './SupplierModal';
 
 export default function Partners() {
@@ -26,39 +26,30 @@ export default function Partners() {
             {t('partners.title')}
           </h2>
 
-          <p className="text-sm sm:text-base text-[#686C6F] mt-2">
+          <p className="text-sm sm:text-base text-[#686C6F] mt-2 leading-relaxed">
             {t('partners.description')}
           </p>
         </div>
 
-        {/* Partner Capability Blocks */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        {/* Partner Capability Blocks - Clean, symmetrical cards without badges */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12 items-stretch">
           {Array.isArray(categories) && categories.map((item, idx) => (
-            <div key={idx} className="bg-white border border-gray-200 p-6 rounded-lg shadow-sm flex flex-col justify-between">
-              <div>
-                <div className="flex items-center gap-2 text-[#1766A3] mb-3">
-                  <Handshake className="w-5 h-5" />
-                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-gray-500">
-                    {t('partners.certified_badge')}
-                  </span>
-                </div>
-                <h3 className="text-sm font-bold text-[#202328] uppercase mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-xs text-[#686C6F]">
-                  {item.desc}
-                </p>
-              </div>
-              <div className="mt-4 pt-3 border-t border-gray-100 flex items-center gap-1.5 text-[11px] font-semibold text-green-700">
-                <CheckCircle className="w-3.5 h-3.5" />
-                <span>{t('partners.audit_badge')}</span>
-              </div>
+            <div 
+              key={idx} 
+              className="bg-white border border-gray-200/90 p-6 rounded-2xl shadow-sm hover:shadow-md hover:border-[#F3A801]/60 transition-all flex flex-col justify-start"
+            >
+              <h3 className="text-sm sm:text-base font-bold text-[#202328] uppercase font-display mb-2.5 leading-snug">
+                {item.title}
+              </h3>
+              <p className="text-xs sm:text-sm text-[#686C6F] leading-relaxed">
+                {item.desc}
+              </p>
             </div>
           ))}
         </div>
 
         {/* Secondary CTA: Supplier Onboarding Box */}
-        <div className="bg-[#202328] text-white p-8 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+        <div className="bg-[#202328] text-white p-8 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
           <div className="space-y-1 text-center sm:text-left">
             <h3 className="text-lg sm:text-xl font-bold uppercase tracking-wide font-display text-white">
               {t('partners.invite_title')}
@@ -70,7 +61,7 @@ export default function Partners() {
 
           <button
             onClick={() => setModalOpen(true)}
-            className="inline-flex items-center gap-2 bg-transparent hover:bg-white/10 border-2 border-[#F3A801] text-[#F3A801] hover:text-white font-bold text-xs uppercase px-6 py-3 rounded transition-all whitespace-nowrap tracking-wider shrink-0"
+            className="inline-flex items-center gap-2 bg-transparent hover:bg-white/10 border-2 border-[#F3A801] text-[#F3A801] hover:text-white font-bold text-xs uppercase px-6 py-3.5 rounded-xl transition-all whitespace-nowrap tracking-wider shrink-0 font-mono"
           >
             <UserPlus className="w-4 h-4" />
             <span>{t('partners.supplier_cta')}</span>
