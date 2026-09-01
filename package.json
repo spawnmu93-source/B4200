@@ -4,9 +4,10 @@
   "description": "Sitio Web Institucional y Plataforma MVP para BASE 4.200 by OBEMA",
   "private": true,
   "scripts": {
+    "build": "npm --prefix client run build",
+    "build:client": "npm --prefix client run build",
     "dev:server": "npm --prefix server run dev",
     "dev:client": "npm --prefix client run dev",
-    "build:client": "npm --prefix client run build",
     "start:server": "npm --prefix server run start"
   }
 }
