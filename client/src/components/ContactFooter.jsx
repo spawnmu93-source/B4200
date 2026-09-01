@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { MapPin, Phone, Mail, MessageCircle, ShieldCheck } from 'lucide-react';
+import { MapPin, Phone, Mail, MessageCircle } from 'lucide-react';
 import logoVerticalWhite from '../assets/logo-vertical-compact-white.svg';
 
 export default function ContactFooter({ onOpenAdmin }) {
@@ -13,23 +13,23 @@ export default function ContactFooter({ onOpenAdmin }) {
       <footer id="contacto" className="bg-[#141619] text-white pt-20 pb-12 border-t border-gray-800 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 pb-16 border-b border-gray-800 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 pb-16 border-b border-gray-800 items-center">
             
-            {/* Column 1 (Left): Prominent Logo + Descriptive Text to the Right */}
-            <div className="lg:col-span-6 flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-8 bg-[#191B1F]/60 p-6 rounded-2xl border border-gray-800 shadow-xl">
+            {/* Column 1 (Left): Prominent Vertical Logo Showcase */}
+            <div className="lg:col-span-6 flex flex-col sm:flex-row items-center gap-6 sm:gap-8 bg-[#191B1F]/80 p-6 sm:p-7 rounded-2xl border border-gray-800 shadow-2xl">
               
-              {/* Large, High-Contrast Vertical Logo Card */}
-              <div className="bg-[#202328] p-4 sm:p-5 rounded-xl border border-gray-700/80 shrink-0 shadow-2xl flex items-center justify-center">
+              {/* Highlighted Vertical Logo */}
+              <div className="bg-[#202328] p-5 sm:p-6 rounded-2xl border border-gray-700/90 shrink-0 shadow-2xl flex items-center justify-center group hover:border-[#F3A801]/40 transition-colors">
                 <img 
                   src={logoVerticalWhite} 
-                  alt="BASE 4.200 Logo" 
-                  className="h-44 sm:h-52 w-auto object-contain"
+                  alt="BASE 4.200 Logo Oficial" 
+                  className="h-48 sm:h-56 md:h-60 w-auto object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.8)] transition-transform group-hover:scale-105"
                 />
               </div>
 
-              {/* Descriptive Content to the RIGHT of the logo */}
+              {/* Descriptive Content */}
               <div className="space-y-4 text-center sm:text-left flex-1 py-1">
-                <div className="inline-flex items-center gap-2 px-2.5 py-1 bg-[#202328] border border-gray-700 rounded text-[11px] font-mono text-[#F3A801] uppercase tracking-wider">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#202328] border border-gray-700 rounded text-xs font-mono text-[#F3A801] uppercase tracking-wider">
                   <span className="w-2 h-2 rounded-full bg-[#F3A801] animate-pulse" />
                   <span>UNIDAD ESPECIALIZADA OBEMA</span>
                 </div>
@@ -79,16 +79,13 @@ export default function ContactFooter({ onOpenAdmin }) {
                   </div>
                 </div>
 
-                {/* Email */}
+                {/* Email - Only mariana.rojo@base4200.com.ar */}
                 <div className="flex items-start gap-3 text-gray-300">
                   <Mail className="w-4 h-4 text-[#F3A801] shrink-0 mt-0.5" />
                   <div>
                     <p className="font-bold text-white uppercase text-xs">{t('contact.email_label')}</p>
-                    <a href="mailto:contacto@obema.com.ar" className="text-gray-400 hover:text-[#F3A801] transition-colors block mt-0.5 text-xs">
-                      contacto@obema.com.ar
-                    </a>
-                    <a href="mailto:mariana.rojo@obema.com.ar" className="text-gray-400 hover:text-[#F3A801] transition-colors block text-xs">
-                      mariana.rojo@obema.com.ar
+                    <a href="mailto:mariana.rojo@base4200.com.ar" className="text-gray-400 hover:text-[#F3A801] transition-colors block mt-0.5 text-xs font-mono">
+                      mariana.rojo@base4200.com.ar
                     </a>
                   </div>
                 </div>
@@ -109,16 +106,11 @@ export default function ContactFooter({ onOpenAdmin }) {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs uppercase px-5 py-3.5 rounded-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 tracking-wider"
+                className="w-full inline-flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#1EBE5D] text-white font-bold text-xs uppercase px-5 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 tracking-wider font-mono"
               >
                 <MessageCircle className="w-4 h-4" />
                 <span>{t('contact.whatsapp_btn')}</span>
               </a>
-
-              <div className="p-3.5 bg-[#202328] rounded-lg border border-gray-700/60 text-[11px] text-gray-400 flex items-start gap-2.5">
-                <ShieldCheck className="w-4 h-4 text-[#F3A801] shrink-0 mt-0.5" />
-                <span>Normas certificadas de seguridad e ingeniería aplicadas en cada campamento.</span>
-              </div>
             </div>
 
           </div>
@@ -129,15 +121,18 @@ export default function ContactFooter({ onOpenAdmin }) {
               © {new Date().getFullYear()} {t('contact.rights')}
             </p>
 
-            <div className="flex items-center gap-6">
-              <a href="#presentacion" className="hover:text-gray-300 transition-colors">
-                {t('contact.link_purpose')}
+            <div className="flex items-center gap-6 font-medium">
+              <a href="#quienes-somos" className="hover:text-gray-300 transition-colors">
+                {t('nav.about')}
               </a>
               <a href="#soluciones" className="hover:text-gray-300 transition-colors">
-                {t('contact.link_solutions')}
+                {t('nav.solutions')}
+              </a>
+              <a href="#respaldo" className="hover:text-gray-300 transition-colors">
+                {t('nav.backing')}
               </a>
               <a href="#configurador" className="hover:text-gray-300 transition-colors">
-                {t('contact.link_config')}
+                {t('nav.configure_cta')}
               </a>
               <button
                 onClick={onOpenAdmin}
