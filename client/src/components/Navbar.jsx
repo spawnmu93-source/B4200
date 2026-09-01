@@ -22,6 +22,7 @@ export default function Navbar({ onOpenAdmin }) {
   };
 
   const navLinks = [
+    { href: '#quienes-somos', label: t('nav.about') },
     { href: '#soluciones', label: t('nav.solutions') },
     { href: '#respaldo', label: t('nav.backing') },
     { href: '#aliados', label: t('nav.partners') },

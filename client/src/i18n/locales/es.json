@@ -1,5 +1,6 @@
 {
   "nav": {
+    "about": "QUIÉNES SOMOS",
     "solutions": "SOLUCIONES",
     "backing": "RESPALDO",
     "partners": "ALIADOS",
@@ -21,20 +22,13 @@
     "backing_desc": "Unidad de negocios de OBEMA S.A."
   },
   "presentation": {
-    "badge": "PROPÓSITO Y CAPACIDAD",
+    "badge": "QUIÉNES SOMOS",
     "title": "SOLUCIONES PARA OPERACIONES REMOTAS",
     "subtitle": "INFRAESTRUCTURA + SERVICIOS + OPERACIÓN",
     "text": "BASE 4.200 es una unidad especializada de OBEMA orientada al desarrollo e integración de soluciones para campamentos y operaciones remotas. Integramos infraestructura, servicios y proveedores especializados para configurar soluciones adaptadas a las condiciones y requerimientos de cada proyecto.",
     "subtext": "Un único integrador para articular alojamiento, servicios y soporte operativo.",
-    "infra_title": "Infraestructura",
-    "infra_desc": "Módulos de alta habitabilidad y carpas diseñadas para resistir vientos extremos y amplitudes térmicas.",
-    "services_title": "Servicios Integrados",
-    "services_desc": "Alimentación de alta calidad nutricional, energía ininterrumpida y gestión logística bajo un solo mando.",
-    "pill_1": "Coordinación Unificada",
-    "pill_2": "Normas de Seguridad Minera",
-    "pill_3": "Respuesta In Situ",
     "photo_badge": "ESTÁNDAR OPERACIONAL",
-    "photo_text": "Presencia en terreno y supervisión continua"
+    "photo_text": "Infraestructura - Servicios - Logística - Control"
   },
   "solutions": {
     "title": "QUÉ OFRECEMOS",
