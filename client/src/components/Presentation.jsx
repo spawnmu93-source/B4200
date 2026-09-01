@@ -6,57 +6,64 @@ export default function Presentation() {
   const { t } = useTranslation();
 
   return (
-    <section id="quienes-somos" className="py-20 sm:py-28 bg-[#FFFFFF] text-[#141619] relative border-b border-gray-200">
+    <section id="quienes-somos" className="py-16 sm:py-24 bg-[#FFFFFF] text-[#141619] relative border-b border-gray-200">
       {/* Anchor for backwards compatibility */}
       <div id="presentacion" className="absolute -top-24" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Technical Header */}
-        <div className="max-w-3xl mb-12 sm:mb-16">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="h-1 w-6 bg-[#F3A801]" />
-            <span className="text-xs font-mono font-bold tracking-widest text-[#202328] uppercase">
-              {t('presentation.badge')}
-            </span>
-          </div>
-
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#202328] uppercase font-display leading-tight">
-            {t('presentation.title')}
-          </h2>
-
-          <p className="text-sm sm:text-base font-bold text-[#F3A801] tracking-widest uppercase mt-2">
-            {t('presentation.subtitle')}
-          </p>
-        </div>
-
-        {/* 2-Column High Contrast Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        {/* 2-Column Symmetrical Layout (Items Stretch) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
           
-          {/* Left Column: Descriptive Content */}
-          <div className="lg:col-span-7 space-y-6">
-            <p className="text-lg sm:text-xl text-[#202328] font-medium leading-relaxed">
-              {t('presentation.text')}
-            </p>
+          {/* Left Column: Integrated Header + Description + Bottom Anchored Card */}
+          <div className="lg:col-span-7 flex flex-col justify-between space-y-6">
+            
+            {/* Top Content Block */}
+            <div>
+              {/* Badge */}
+              <div className="flex items-center gap-2 mb-3">
+                <span className="h-1 w-6 bg-[#F3A801]" />
+                <span className="text-xs font-mono font-bold tracking-widest text-[#202328] uppercase">
+                  {t('presentation.badge')}
+                </span>
+              </div>
 
-            <div className="bg-[#202328] text-white p-6 sm:p-8 rounded-xl border-l-4 border-[#F3A801] shadow-xl">
-              <p className="text-base sm:text-lg font-bold tracking-wide uppercase text-gray-100 font-display">
+              {/* Title */}
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#202328] uppercase font-display leading-[1.1]">
+                {t('presentation.title')}
+              </h2>
+
+              {/* Subtitle */}
+              <p className="text-xs sm:text-sm font-bold text-[#F3A801] tracking-widest uppercase mt-2">
+                {t('presentation.subtitle')}
+              </p>
+
+              {/* Description Paragraph with Natural Spacing */}
+              <p className="text-base sm:text-lg text-gray-700 leading-relaxed font-normal mt-5">
+                {t('presentation.text')}
+              </p>
+            </div>
+
+            {/* Bottom Anchored Highlight Card - Perfectly aligned with photo bottom */}
+            <div className="bg-[#202328] text-white p-5 sm:p-6 rounded-xl border-l-4 border-[#F3A801] shadow-xl mt-6 lg:mt-0">
+              <p className="text-sm sm:text-base lg:text-lg font-bold tracking-wide uppercase text-gray-100 font-display leading-snug">
                 {t('presentation.subtext')}
               </p>
             </div>
+
           </div>
 
-          {/* Right Column: Visual Photo Card */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-[#202328]">
+          {/* Right Column: Symmetrical Photo Card */}
+          <div className="lg:col-span-5 relative flex flex-col">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-[#202328] w-full h-full min-h-[400px] sm:min-h-[460px] flex flex-col justify-end">
               <img
                 src={modelVertical}
                 alt="Operario BASE 4.200 en terreno"
-                className="w-full h-auto object-cover max-h-[500px]"
+                className="absolute inset-0 w-full h-full object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#141619] via-[#141619]/40 to-transparent opacity-90" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#141619] via-[#141619]/30 to-transparent opacity-90" />
               
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+              <div className="relative z-10 p-6 text-white">
                 <div className="flex items-center gap-2 mb-2">
                   <span className="w-2 h-2 rounded-full bg-[#F3A801] animate-pulse" />
                   <span className="text-[11px] font-mono font-bold tracking-widest uppercase text-[#F3A801]">
@@ -69,8 +76,8 @@ export default function Presentation() {
               </div>
             </div>
 
-            {/* Subtle technical background grid accent */}
-            <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-[#F3A801]/10 -z-10 rounded-2xl border border-[#F3A801]/30" />
+            {/* Subtle technical background accent */}
+            <div className="absolute -bottom-3 -right-3 w-28 h-28 bg-[#F3A801]/10 -z-10 rounded-2xl border border-[#F3A801]/30" />
           </div>
 
         </div>
