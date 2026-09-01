@@ -79,7 +79,7 @@ export default function Solutions() {
           </p>
         </div>
 
-        {/* LEVEL 1: Primary Services */}
+        {/* LEVEL 1: Primary Services (3 Symmetrical Cards) */}
         <div className="mb-16">
           <div className="flex items-center gap-3 mb-6 pb-2 border-b border-gray-700/80">
             <span className="text-xs font-mono font-bold tracking-widest text-gray-400 uppercase">
@@ -87,39 +87,39 @@ export default function Solutions() {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-stretch">
             {primaryServices.map((service) => {
               const IconComponent = service.icon;
               return (
                 <div 
                   key={service.number}
-                  className="bg-[#141619] border border-gray-700/80 rounded-lg p-6 sm:p-8 relative group hover:border-[#F3A801] transition-all duration-300 shadow-xl flex flex-col justify-between"
+                  className="bg-[#141619] border border-gray-700/80 rounded-2xl p-6 sm:p-8 relative group hover:border-[#F3A801] transition-all duration-300 shadow-xl flex flex-col justify-between h-full"
                 >
-                  {/* Top indicator */}
+                  {/* Top indicator & content */}
                   <div>
                     <div className="flex items-center justify-between mb-6">
                       <span className="text-3xl font-extrabold font-mono text-[#F3A801]">
                         {service.number}
                       </span>
-                      <div className="p-3 bg-[#202328] border border-gray-700 rounded text-[#F3A801] group-hover:scale-110 transition-transform">
+                      <div className="p-3 bg-[#202328] border border-gray-700 rounded-xl text-[#F3A801] group-hover:scale-110 group-hover:border-[#F3A801]/60 transition-all shadow-md">
                         <IconComponent className="w-6 h-6" />
                       </div>
                     </div>
 
-                    <h3 className="text-xl sm:text-2xl font-bold uppercase tracking-wide font-display text-white mb-3">
+                    <h3 className="text-xl sm:text-2xl font-bold uppercase tracking-wide font-display text-white mb-2">
                       {service.title}
                     </h3>
 
-                    <p className="text-sm text-gray-300 leading-relaxed mb-6">
+                    <p className="text-xs sm:text-sm font-semibold text-[#F3A801] tracking-wider uppercase mb-6 leading-relaxed">
                       {service.desc}
                     </p>
                   </div>
 
                   {/* Technical tags */}
-                  <div className="pt-4 border-t border-gray-800 space-y-1.5">
+                  <div className="pt-5 border-t border-gray-800/80 space-y-2">
                     {service.tags.map((tag, idx) => (
-                      <div key={idx} className="flex items-center gap-2 text-xs font-mono text-gray-400">
-                        <span className="w-1.5 h-1.5 bg-[#F3A801] rounded-full" />
+                      <div key={idx} className="flex items-center gap-2.5 text-xs font-mono text-gray-300">
+                        <span className="w-1.5 h-1.5 bg-[#F3A801] rounded-full shrink-0" />
                         <span>{tag}</span>
                       </div>
                     ))}
@@ -130,7 +130,7 @@ export default function Solutions() {
           </div>
         </div>
 
-        {/* LEVEL 2: Support Services */}
+        {/* LEVEL 2: Support Services (8 Symmetrical Clean Cards without SOPORTE text) */}
         <div>
           <div className="flex items-center gap-3 mb-6 pb-2 border-b border-gray-700/80">
             <span className="text-xs font-mono font-bold tracking-widest text-gray-400 uppercase">
@@ -142,27 +142,26 @@ export default function Solutions() {
             {t('solutions.support_subtitle')}
           </p>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {supportServices.map((service) => {
               const IconComponent = service.icon;
               return (
                 <div
                   key={service.id}
-                  className="bg-[#191B1F] border border-gray-800 p-4 rounded hover:border-gray-600 transition-colors flex flex-col justify-between"
+                  className="bg-[#191B1F] border border-gray-800/90 p-5 rounded-xl hover:border-[#F3A801]/50 transition-all shadow-md flex flex-col justify-between group"
                 >
-                  <div className="flex items-center justify-between mb-3">
-                    <IconComponent className="w-5 h-5 text-[#F3A801]" />
-                    <span className="text-[10px] font-mono text-gray-500 uppercase">{t('solutions.support_badge')}</span>
-                  </div>
-
-                  <div>
-                    <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-100 mb-1">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="p-2 bg-[#202328] border border-gray-700/80 rounded-lg text-[#F3A801] group-hover:scale-105 transition-transform shrink-0">
+                      <IconComponent className="w-5 h-5" />
+                    </div>
+                    <h4 className="text-xs sm:text-sm font-bold uppercase tracking-wider text-gray-100 font-display">
                       {service.name}
                     </h4>
-                    <p className="text-[11px] text-gray-400 leading-snug">
-                      {service.desc}
-                    </p>
                   </div>
+
+                  <p className="text-xs text-gray-400 leading-relaxed font-normal">
+                    {service.desc}
+                  </p>
                 </div>
               );
             })}
@@ -170,7 +169,7 @@ export default function Solutions() {
         </div>
 
         {/* Operational Closing Banner */}
-        <div className="mt-16 bg-[#141619] border-2 border-[#F3A801] p-6 sm:p-8 rounded-lg flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
+        <div className="mt-16 bg-[#141619] border-2 border-[#F3A801] p-6 sm:p-8 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
           <div>
             <p className="text-lg sm:text-xl font-bold uppercase tracking-wide text-white font-display">
               {t('solutions.closing')}
@@ -182,7 +181,7 @@ export default function Solutions() {
 
           <a
             href="#configurador"
-            className="inline-flex items-center gap-2 bg-[#F3A801] hover:bg-[#DE9900] text-[#141619] font-bold text-xs uppercase px-6 py-3.5 rounded transition-all whitespace-nowrap tracking-wider shrink-0"
+            className="inline-flex items-center gap-2 bg-[#F3A801] hover:bg-[#DE9900] text-[#141619] font-bold text-xs uppercase px-6 py-3.5 rounded-xl transition-all whitespace-nowrap tracking-wider shrink-0 font-mono shadow-lg"
           >
             <span>{t('solutions.closing_cta')}</span>
             <ArrowRight className="w-4 h-4" />
