@@ -212,10 +212,6 @@ export default function AdminDashboard({ onClose }) {
               {loading ? 'AUTENTICANDO...' : 'INGRESAR AL PANEL →'}
             </button>
           </form>
-
-          <p className="text-[11px] text-gray-500 text-center mt-6">
-            Credenciales de acceso demo: <span className="font-mono text-gray-300">admin</span> / <span className="font-mono text-gray-300">Base4200@Admin</span>
-          </p>
         </div>
       </div>
     );

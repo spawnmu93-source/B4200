@@ -58,15 +58,7 @@ async function generatePerfectCard() {
     ctx.stroke();
   }
 
-  // 5. Diagonal Decorative Cut Line separating Top-Left from Top-Right
-  ctx.strokeStyle = '#F3A801';
-  ctx.lineWidth = 3.5;
-  ctx.beginPath();
-  ctx.moveTo(1060, 60);
-  ctx.lineTo(960, 960);
-  ctx.stroke();
-
-  // 6. Mountain Panorama in Middle-Bottom
+  // 5. Mountain Panorama in Middle-Bottom
   const heroPath = 'src/assets/hero-bg-horizontal.png';
   if (fs.existsSync(heroPath)) {
     const mountainImg = await loadImage(heroPath);

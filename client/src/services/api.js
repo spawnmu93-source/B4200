@@ -157,13 +157,13 @@ export const api = {
       // Fallback for Vercel demo
     }
 
-    // Demo Authentication
-    if (username.trim() === 'admin' && (password === 'Base4200@Admin' || password === 'admin')) {
-      const token = 'demo_token_' + btoa(username + ':' + Date.now());
+    // Static / Production Authentication
+    if (username.trim() === 'admin' && (password === 'Base4200*' || password === 'Base4200@Admin')) {
+      const token = 'auth_token_' + btoa(username + ':' + Date.now());
       return {
         token,
         user: { username: 'admin', role: 'superadmin' },
-        message: 'Acceso concedido en modo demostración'
+        message: 'Acceso concedido exitosamente'
       };
     } else {
       throw new Error('Credenciales inválidas. Usuario o contraseña incorrectos.');
