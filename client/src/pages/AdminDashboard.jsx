@@ -18,7 +18,8 @@ import {
   Calendar,
   X,
   ChevronRight,
-  Filter
+  Filter,
+  Download
 } from 'lucide-react';
 import logoHorizontalWhite from '../assets/logo-horizontal-white.svg';
 import { api } from '../services/api';
@@ -232,7 +233,17 @@ export default function AdminDashboard({ onClose }) {
           </span>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          <a
+            href="/BASE_4200_QR_CARD.png"
+            download="BASE_4200_QR_CARD.png"
+            className="inline-flex items-center gap-1.5 bg-[#F3A801] hover:bg-[#DE9900] text-[#141619] font-bold text-xs uppercase px-3.5 py-1.5 rounded font-mono shadow transition-all transform hover:scale-105"
+            title="Descargar Tarjeta QR Oficial en PNG"
+          >
+            <Download className="w-3.5 h-3.5" />
+            <span>DESCARGAR TARJETA</span>
+          </a>
+
           <button
             onClick={fetchDashboardData}
             title="Recargar datos"
@@ -315,6 +326,18 @@ export default function AdminDashboard({ onClose }) {
                 </div>
               </div>
             )}
+          </div>
+
+          <div className="pt-4 border-t border-gray-800 mt-4">
+            <p className="text-[10px] font-mono text-gray-500 uppercase px-2 mb-2">Material Gráfico</p>
+            <a
+              href="/BASE_4200_QR_CARD.png"
+              download="BASE_4200_QR_CARD.png"
+              className="w-full flex items-center justify-center gap-2 bg-[#202328] hover:bg-[#F3A801] text-gray-300 hover:text-[#141619] border border-gray-700 hover:border-[#F3A801] p-2.5 rounded-lg text-xs font-bold font-mono uppercase tracking-wider transition-all"
+            >
+              <Download className="w-4 h-4 text-[#F3A801] group-hover:text-[#141619]" />
+              <span>Descargar Tarjeta</span>
+            </a>
           </div>
         </aside>
 
