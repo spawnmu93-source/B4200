@@ -355,17 +355,21 @@ export const api = {
   // Admin: Update Inquiry Status
   async updateInquiryStatus(token, id, newStatus) {
     try {
-      const res = await fetch(`${API_BASE}/api/admin/inquiries/${id}`, {
+      const res = await fetch(`${API_BASE}/api/admin/inquiries`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify({ status: newStatus })
+        body: JSON.stringify({ id, status: newStatus })
       });
       const contentType = res.headers.get('content-type');
       if (res.ok && contentType && contentType.includes('application/json')) {
-        return await res.json();
+        const data = await res.json();
+        const list = getStoredInquiries();
+        const updated = list.map(i => i.id === id ? { ...i, status: newStatus } : i);
+        saveStoredInquiries(updated);
+        return data;
       }
     } catch {
       // Fallback
@@ -380,17 +384,21 @@ export const api = {
   // Admin: Update Supplier Status
   async updateSupplierStatus(token, id, newStatus) {
     try {
-      const res = await fetch(`${API_BASE}/api/admin/suppliers/${id}`, {
+      const res = await fetch(`${API_BASE}/api/admin/suppliers`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`
         },
-        body: JSON.stringify({ status: newStatus })
+        body: JSON.stringify({ id, status: newStatus })
       });
       const contentType = res.headers.get('content-type');
       if (res.ok && contentType && contentType.includes('application/json')) {
-        return await res.json();
+        const data = await res.json();
+        const list = getStoredSuppliers();
+        const updated = list.map(s => s.id === id ? { ...s, status: newStatus } : s);
+        saveStoredSuppliers(updated);
+        return data;
       }
     } catch {
       // Fallback
