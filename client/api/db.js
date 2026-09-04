@@ -1,5 +1,4 @@
-import pkg from '@neondatabase/serverless';
-const { neon } = pkg;
+import { neon } from '@neondatabase/serverless';
 
 const connectionString = process.env.DATABASE_URL ||
   process.env.POSTGRES_URL ||
