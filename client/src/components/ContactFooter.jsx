@@ -79,13 +79,13 @@ export default function ContactFooter({ onOpenAdmin }) {
                   </div>
                 </div>
 
-                {/* Email - Only mariana.rojo@base4200.com.ar */}
+                {/* Email - mariana.rojo@obema.com */}
                 <div className="flex items-start gap-3 text-gray-300">
                   <Mail className="w-4 h-4 text-[#F3A801] shrink-0 mt-0.5" />
                   <div>
                     <p className="font-bold text-white uppercase text-xs">{t('contact.email_label')}</p>
-                    <a href="mailto:mariana.rojo@base4200.com.ar" className="text-gray-400 hover:text-[#F3A801] transition-colors block mt-0.5 text-xs font-mono">
-                      mariana.rojo@base4200.com.ar
+                    <a href="mailto:mariana.rojo@obema.com" className="text-gray-400 hover:text-[#F3A801] transition-colors block mt-0.5 text-xs font-mono">
+                      mariana.rojo@obema.com
                     </a>
                   </div>
                 </div>

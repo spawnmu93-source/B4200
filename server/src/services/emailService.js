@@ -15,7 +15,7 @@ if (process.env.SMTP_HOST && process.env.SMTP_USER) {
 }
 
 export async function sendCampInquiryNotification(inquiry) {
-  const recipient = process.env.NOTIFICATION_EMAIL || 'contacto@obema.com.ar, mariana.rojo@obema.com.ar';
+  const recipient = process.env.NOTIFICATION_EMAIL || 'contacto@obema.com.ar, mariana.rojo@obema.com';
   
   const servicesList = Array.isArray(inquiry.services) 
     ? inquiry.services.join(', ')
