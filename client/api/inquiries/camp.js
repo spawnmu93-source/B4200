@@ -64,9 +64,12 @@ export default async function handler(req, res) {
       return res.status(201).json({
         success: true,
         inquiry_code: inquiryCode,
+        inquiryCode: inquiryCode,
         message: 'Configuración registrada exitosamente en la base de datos.',
         data: {
           ...saved,
+          inquiry_code: inquiryCode,
+          inquiryCode: inquiryCode,
           services: Array.isArray(services) ? services : []
         }
       });

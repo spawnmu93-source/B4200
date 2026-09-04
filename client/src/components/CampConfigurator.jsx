@@ -161,8 +161,8 @@ export default function CampConfigurator() {
               {t('configurator.success_desc')}
             </p>
 
-            <div className="bg-[#141619] border border-gray-700 py-3 px-6 rounded-lg inline-block mb-6 font-mono text-2xl font-bold text-[#F3A801] tracking-widest shadow-inner">
-              {successData.inquiryCode}
+            <div className="bg-[#141619] border border-[#F3A801]/60 py-3 px-8 rounded-lg inline-block mb-6 font-mono text-2xl sm:text-3xl font-black text-[#F3A801] tracking-widest shadow-inner">
+              {successData.inquiry_code || successData.inquiryCode || successData.data?.inquiry_code || successData.data?.inquiryCode || 'B42-4200'}
             </div>
 
             <p className="text-xs sm:text-sm text-gray-400 max-w-md mx-auto mb-8">

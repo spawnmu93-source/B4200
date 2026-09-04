@@ -19,6 +19,7 @@ export default function SupplierModal({ isOpen, onClose }) {
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [successData, setSuccessData] = useState(null);
   const [errorMsg, setErrorMsg] = useState('');
 
   if (!isOpen) return null;
@@ -37,7 +38,8 @@ export default function SupplierModal({ isOpen, onClose }) {
     setErrorMsg('');
 
     try {
-      await api.submitSupplierInquiry(formData);
+      const res = await api.submitSupplierInquiry(formData);
+      setSuccessData(res);
       setSuccess(true);
     } catch (err) {
       setErrorMsg(err.message || 'Error al procesar la postulación.');
@@ -48,6 +50,7 @@ export default function SupplierModal({ isOpen, onClose }) {
 
   const handleResetAndClose = () => {
     setSuccess(false);
+    setSuccessData(null);
     setErrorMsg('');
     setFormData({
       company_name: '',
@@ -92,15 +95,23 @@ export default function SupplierModal({ isOpen, onClose }) {
               <div className="inline-flex p-3 bg-green-500/10 text-green-400 rounded-full border border-green-500/30">
                 <CheckCircle className="w-12 h-12" />
               </div>
-              <h4 className="text-xl font-bold uppercase text-white font-display">
-                Postulación Recibida
+              <h4 className="text-xl sm:text-2xl font-bold uppercase text-white font-display">
+                Postulación Registrada Exitosamente
               </h4>
-              <p className="text-sm text-gray-300 max-w-md mx-auto">
+              <p className="text-xs sm:text-sm text-gray-300 max-w-md mx-auto">
+                Hemos generado el código de operación para tu postulación:
+              </p>
+              <div>
+                <div className="bg-[#141619] border border-[#F3A801]/60 py-3 px-8 rounded-lg inline-block font-mono text-2xl sm:text-3xl font-black text-[#F3A801] tracking-widest shadow-inner my-2">
+                  {successData?.supplier_code || successData?.supplierCode || successData?.data?.supplier_code || 'PRV-4200'}
+                </div>
+              </div>
+              <p className="text-xs text-gray-400 max-w-md mx-auto leading-relaxed">
                 {t('supplier_modal.success')}
               </p>
               <button
                 onClick={handleResetAndClose}
-                className="mt-4 bg-[#F3A801] hover:bg-[#DE9900] text-[#141619] font-bold text-xs uppercase px-6 py-3 rounded tracking-wider"
+                className="mt-4 bg-[#F3A801] hover:bg-[#DE9900] text-[#141619] font-bold text-xs uppercase px-8 py-3.5 rounded tracking-wider transition-all"
               >
                 {t('supplier_modal.close')}
               </button>

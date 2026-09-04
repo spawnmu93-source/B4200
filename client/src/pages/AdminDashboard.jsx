@@ -98,6 +98,33 @@ export default function AdminDashboard({ onClose }) {
     document.body.removeChild(link);
   };
 
+  const exportSuppliersToCSV = () => {
+    if (!suppliers || suppliers.length === 0) return;
+    const headers = ['Codigo', 'Empresa', 'Categoria', 'Servicios', 'Cobertura', 'Contacto', 'Telefono', 'Email', 'Web', 'Estado', 'Fecha'];
+    const rows = suppliers.map(sup => [
+      `"${sup.supplier_code || ('PRV-' + sup.id)}"`,
+      `"${(sup.company_name || '').replace(/"/g, '""')}"`,
+      `"${(sup.category || '').replace(/"/g, '""')}"`,
+      `"${(sup.services_offered || '').replace(/"/g, '""')}"`,
+      `"${(sup.coverage_area || '').replace(/"/g, '""')}"`,
+      `"${(sup.contact_person || '').replace(/"/g, '""')}"`,
+      `"${(sup.phone || '').replace(/"/g, '""')}"`,
+      `"${(sup.email || '').replace(/"/g, '""')}"`,
+      `"${(sup.website || '').replace(/"/g, '""')}"`,
+      `"${sup.status || ''}"`,
+      `"${sup.created_at || ''}"`
+    ]);
+    const csvContent = '\uFEFF' + [headers.join(','), ...rows.map(r => r.join(','))].join('\r\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `BASE_4200_Proveedores_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   // Check login on mount
   useEffect(() => {
     if (token) {
@@ -513,9 +540,20 @@ export default function AdminDashboard({ onClose }) {
           {/* TAB 2: SUPPLIERS */}
           {activeTab === 'suppliers' && (
             <div className="space-y-6">
-              <h3 className="text-lg font-bold uppercase font-display text-white">
-                Postulaciones de Proveedores Registradas
-              </h3>
+              <div className="flex items-center justify-between">
+                <h3 className="text-lg font-bold uppercase font-display text-white">
+                  Postulaciones de Proveedores Registradas
+                </h3>
+
+                <button
+                  onClick={exportSuppliersToCSV}
+                  title="Descargar copia de proveedores en Excel / CSV"
+                  className="inline-flex items-center gap-1.5 bg-[#202328] hover:bg-[#F3A801] text-gray-300 hover:text-[#141619] border border-gray-700 hover:border-[#F3A801] px-3 py-1.5 rounded text-xs font-mono font-bold transition-all shadow"
+                >
+                  <Download className="w-3.5 h-3.5 text-[#F3A801] hover:text-[#141619]" />
+                  <span>Exportar Proveedores CSV</span>
+                </button>
+              </div>
 
               {suppliers.length === 0 ? (
                 <div className="text-center py-16 bg-[#202328] border border-gray-800 rounded-lg">
@@ -528,10 +566,15 @@ export default function AdminDashboard({ onClose }) {
                     <div key={sup.id} className="bg-[#202328] border border-gray-800 p-5 rounded-lg space-y-3">
                       <div className="flex items-start justify-between">
                         <div>
+                          <div className="flex items-center gap-2 mb-1.5">
+                            <span className="text-xs font-mono font-bold text-[#F3A801] bg-[#141619] px-2 py-0.5 rounded border border-[#F3A801]/40 shadow-sm">
+                              {sup.supplier_code || `PRV-${sup.id}`}
+                            </span>
+                          </div>
                           <h4 className="text-base font-bold text-white uppercase font-display">
                             {sup.company_name}
                           </h4>
-                          <span className="text-xs font-mono text-[#F3A801] uppercase">
+                          <span className="text-xs font-mono text-gray-400 uppercase">
                             {sup.category} · Cobertura: {sup.coverage_area}
                           </span>
                         </div>

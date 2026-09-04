@@ -32,11 +32,14 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Faltan campos obligatorios para la postulación.' });
       }
 
+      const supplierCode = 'PRV-' + Math.floor(1000 + Math.random() * 9000);
+
       const rows = await sql`
         INSERT INTO supplier_applications (
-          company_name, category, services_offered, coverage_area,
+          supplier_code, company_name, category, services_offered, coverage_area,
           contact_person, phone, email, website, status
         ) VALUES (
+          ${supplierCode},
           ${company_name},
           ${category || 'General'},
           ${services_offered || ''},
@@ -52,6 +55,8 @@ export default async function handler(req, res) {
 
       return res.status(201).json({
         success: true,
+        supplier_code: supplierCode,
+        supplierCode: supplierCode,
         message: 'Postulación recibida y registrada exitosamente en la base de datos.',
         data: rows[0]
       });

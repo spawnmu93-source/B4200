@@ -72,6 +72,7 @@ const INITIAL_INQUIRIES = [
 const INITIAL_SUPPLIERS = [
   {
     id: 1,
+    supplier_code: 'PRV-9120',
     company_name: 'Andes Logística Pesada SRL',
     category: 'Logística y Transporte 4x4',
     services_offered: 'Fletes en alta montaña, camiones tolva, camionetas mineras equipadas para puna.',
@@ -85,6 +86,7 @@ const INITIAL_SUPPLIERS = [
   },
   {
     id: 2,
+    supplier_code: 'PRV-8451',
     company_name: 'Energía Solar Cordillerana',
     category: 'Energía Renovable y Generación',
     services_offered: 'Sistemas híbridos fotovoltaicos con banco de baterías de litio para campamentos aislados.',
@@ -226,6 +228,7 @@ export const api = {
     return {
       success: true,
       inquiry_code: code,
+      inquiryCode: code,
       message: 'Configuración registrada exitosamente.',
       data: newInquiry
     };
@@ -247,8 +250,10 @@ export const api = {
       // Fallback
     }
 
+    const supplierCode = 'PRV-' + Math.floor(1000 + Math.random() * 9000);
     const newSupplier = {
       id: Date.now(),
+      supplier_code: supplierCode,
       company_name: payload.company_name,
       category: payload.category,
       services_offered: payload.services_offered,
@@ -266,6 +271,8 @@ export const api = {
 
     return {
       success: true,
+      supplier_code: supplierCode,
+      supplierCode: supplierCode,
       message: 'Postulación recibida exitosamente.',
       data: newSupplier
     };
