@@ -98,16 +98,33 @@ const INITIAL_SUPPLIERS = [
   }
 ];
 
+function normalizeInquiry(inq) {
+  if (!inq) return inq;
+  let s = inq.services;
+  if (typeof s === 'string') {
+    try {
+      s = JSON.parse(s);
+    } catch {
+      s = [s];
+    }
+  }
+  return {
+    ...inq,
+    services: Array.isArray(s) ? s : []
+  };
+}
+
 function getStoredInquiries() {
   try {
     const data = localStorage.getItem('base4200_inquiries');
     if (!data) {
       localStorage.setItem('base4200_inquiries', JSON.stringify(INITIAL_INQUIRIES));
-      return INITIAL_INQUIRIES;
+      return INITIAL_INQUIRIES.map(normalizeInquiry);
     }
-    return JSON.parse(data);
+    const parsed = JSON.parse(data);
+    return Array.isArray(parsed) ? parsed.map(normalizeInquiry) : INITIAL_INQUIRIES.map(normalizeInquiry);
   } catch {
-    return INITIAL_INQUIRIES;
+    return INITIAL_INQUIRIES.map(normalizeInquiry);
   }
 }
 
@@ -197,7 +214,7 @@ export const api = {
       estimated_people: payload.estimated_people,
       location: payload.location,
       duration: payload.duration,
-      services: JSON.stringify(payload.services),
+      services: Array.isArray(payload.services) ? payload.services : [],
       notes: payload.notes || '',
       status: 'nueva',
       created_at: new Date().toISOString()

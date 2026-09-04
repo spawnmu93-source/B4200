@@ -41,6 +41,63 @@ export default function AdminDashboard({ onClose }) {
   const [selectedInquiry, setSelectedInquiry] = useState(null);
   const [updatingId, setUpdatingId] = useState(null);
 
+  const SERVICE_NAMES = {
+    accommodation: 'Alojamiento',
+    catering: 'Catering',
+    cleaning: 'Limpieza',
+    energy: 'Energía',
+    water: 'Agua',
+    internet: 'Internet',
+    waste: 'Residuos',
+    logistics: 'Logística',
+    health: 'Salud',
+    security: 'Seguridad',
+    ops_control: 'Control Operativo',
+    other: 'Otros Requerimientos'
+  };
+
+  const getInquiryServices = (inq) => {
+    if (!inq || !inq.services) return [];
+    let s = inq.services;
+    if (typeof s === 'string') {
+      try {
+        s = JSON.parse(s);
+      } catch {
+        s = [s];
+      }
+    }
+    if (!Array.isArray(s)) return [];
+    return s.map(key => SERVICE_NAMES[key] || key);
+  };
+
+  const exportInquiriesToCSV = () => {
+    if (!inquiries || inquiries.length === 0) return;
+    const headers = ['Codigo', 'Empresa', 'Contacto', 'Ubicacion', 'PAX', 'Duracion', 'Telefono', 'Email', 'Servicios', 'Notas', 'Estado', 'Fecha'];
+    const rows = inquiries.map(inq => [
+      `"${inq.inquiry_code || ''}"`,
+      `"${(inq.company_name || '').replace(/"/g, '""')}"`,
+      `"${(inq.contact_person || '').replace(/"/g, '""')}"`,
+      `"${(inq.location || '').replace(/"/g, '""')}"`,
+      inq.estimated_people || 0,
+      `"${(inq.duration || '').replace(/"/g, '""')}"`,
+      `"${(inq.phone || '').replace(/"/g, '""')}"`,
+      `"${(inq.email || '').replace(/"/g, '""')}"`,
+      `"${getInquiryServices(inq).join('; ')}"`,
+      `"${(inq.notes || '').replace(/"/g, '""')}"`,
+      `"${inq.status || ''}"`,
+      `"${inq.created_at || ''}"`
+    ]);
+    const csvContent = '\uFEFF' + [headers.join(','), ...rows.map(r => r.join(','))].join('\r\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', `BASE_4200_Consultas_${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   // Check login on mount
   useEffect(() => {
     if (token) {
@@ -346,20 +403,31 @@ export default function AdminDashboard({ onClose }) {
               
               {/* Filter and Search Bar */}
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-[#202328] p-4 rounded-lg border border-gray-800">
-                <div className="flex items-center gap-2 w-full sm:w-auto">
-                  <Filter className="w-4 h-4 text-[#F3A801]" />
-                  <span className="text-xs font-bold uppercase text-gray-300">Estado:</span>
-                  <select
-                    value={statusFilter}
-                    onChange={(e) => setStatusFilter(e.target.value)}
-                    className="bg-[#141619] border border-gray-700 rounded px-2.5 py-1 text-xs text-white focus:outline-none"
+                <div className="flex items-center gap-3 w-full sm:w-auto">
+                  <div className="flex items-center gap-2">
+                    <Filter className="w-4 h-4 text-[#F3A801]" />
+                    <span className="text-xs font-bold uppercase text-gray-300">Estado:</span>
+                    <select
+                      value={statusFilter}
+                      onChange={(e) => setStatusFilter(e.target.value)}
+                      className="bg-[#141619] border border-gray-700 rounded px-2.5 py-1 text-xs text-white focus:outline-none"
+                    >
+                      <option value="todas">Todas</option>
+                      <option value="nueva">Nueva</option>
+                      <option value="contactada">Contactada</option>
+                      <option value="en_analisis">En Análisis</option>
+                      <option value="cerrada">Cerrada</option>
+                    </select>
+                  </div>
+
+                  <button
+                    onClick={exportInquiriesToCSV}
+                    title="Descargar copia de seguridad en Excel / CSV"
+                    className="inline-flex items-center gap-1.5 bg-[#141619] hover:bg-[#F3A801] text-gray-300 hover:text-[#141619] border border-gray-700 hover:border-[#F3A801] px-2.5 py-1 rounded text-xs font-mono font-bold transition-all shadow"
                   >
-                    <option value="todas">Todas</option>
-                    <option value="nueva">Nueva</option>
-                    <option value="contactada">Contactada</option>
-                    <option value="en_analisis">En Análisis</option>
-                    <option value="cerrada">Cerrada</option>
-                  </select>
+                    <Download className="w-3.5 h-3.5 text-[#F3A801] hover:text-[#141619]" />
+                    <span>Exportar CSV</span>
+                  </button>
                 </div>
 
                 <div className="relative w-full sm:w-72">
@@ -549,7 +617,7 @@ export default function AdminDashboard({ onClose }) {
               <div className="grid grid-cols-2 gap-4 bg-[#141619] p-4 rounded-lg">
                 <div>
                   <span className="text-gray-400 block text-xs">Ubicación de Proyecto:</span>
-                  <span className="font-bold text-white">{selectedInquiry.location}</span>
+                  <span className="font-bold text-white">{selectedInquiry.location || 'No especificada'}</span>
                 </div>
                 <div>
                   <span className="text-gray-400 block text-xs">Dotación Estimada:</span>
@@ -557,11 +625,13 @@ export default function AdminDashboard({ onClose }) {
                 </div>
                 <div>
                   <span className="text-gray-400 block text-xs">Duración Operación:</span>
-                  <span className="font-semibold text-white">{selectedInquiry.duration}</span>
+                  <span className="font-semibold text-white">{selectedInquiry.duration || 'A coordinar'}</span>
                 </div>
                 <div>
-                  <span className="text-gray-400 block text-xs">Idioma Origen:</span>
-                  <span className="font-mono uppercase text-gray-300">{selectedInquiry.language}</span>
+                  <span className="text-gray-400 block text-xs">Fecha de Solicitud:</span>
+                  <span className="font-mono text-gray-300">
+                    {selectedInquiry.created_at ? new Date(selectedInquiry.created_at).toLocaleString('es-AR') : 'Reciente'}
+                  </span>
                 </div>
               </div>
 
@@ -569,22 +639,40 @@ export default function AdminDashboard({ onClose }) {
               <div>
                 <h4 className="font-bold uppercase text-gray-300 text-xs mb-2">Servicios Solicitados:</h4>
                 <div className="flex flex-wrap gap-1.5">
-                  {selectedInquiry.services.map((svc, i) => (
-                    <span key={i} className="px-2.5 py-1 bg-[#141619] border border-gray-700 rounded text-xs text-[#F3A801]">
+                  {getInquiryServices(selectedInquiry).map((svc, i) => (
+                    <span key={i} className="px-2.5 py-1 bg-[#141619] border border-gray-700 rounded text-xs text-[#F3A801] font-semibold">
                       {svc}
                     </span>
                   ))}
+                  {getInquiryServices(selectedInquiry).length === 0 && (
+                    <span className="text-gray-500 text-xs italic">Sin servicios específicos seleccionados</span>
+                  )}
                 </div>
               </div>
 
               {/* Datos de Contacto */}
-              <div className="bg-[#141619] p-4 rounded-lg space-y-2">
-                <h4 className="font-bold uppercase text-gray-300 text-xs">Canal Directo:</h4>
-                <p><span className="text-gray-400">Responsable:</span> <span className="font-semibold">{selectedInquiry.contact_person || 'No indicado'}</span></p>
-                <p><span className="text-gray-400">Teléfono:</span> <a href={`tel:${selectedInquiry.phone}`} className="text-blue-400">{selectedInquiry.phone}</a></p>
-                <p><span className="text-gray-400">Email:</span> <a href={`mailto:${selectedInquiry.email}`} className="text-blue-400">{selectedInquiry.email}</a></p>
+              <div className="bg-[#141619] p-4 rounded-lg space-y-2.5">
+                <h4 className="font-bold uppercase text-gray-300 text-xs">Canal Directo de Contacto:</h4>
+                <p><span className="text-gray-400">Responsable:</span> <span className="font-semibold text-white">{selectedInquiry.contact_person || 'No indicado'}</span></p>
+                <p>
+                  <span className="text-gray-400">Teléfono:</span>{' '}
+                  <a href={`tel:${selectedInquiry.phone}`} className="text-blue-400 hover:underline font-mono">
+                    {selectedInquiry.phone}
+                  </a>
+                </p>
+                <p>
+                  <span className="text-gray-400">Email:</span>{' '}
+                  <a href={`mailto:${selectedInquiry.email}`} className="text-blue-400 hover:underline font-mono">
+                    {selectedInquiry.email}
+                  </a>
+                </p>
                 {selectedInquiry.notes && (
-                  <p className="pt-2 border-t border-gray-800"><span className="text-gray-400">Notas:</span> {selectedInquiry.notes}</p>
+                  <div className="pt-2 border-t border-gray-800">
+                    <span className="text-gray-400 block mb-1">Notas y Requerimientos Adicionales:</span>
+                    <p className="p-3 bg-[#202328] rounded border border-gray-700 text-gray-200 text-xs whitespace-pre-wrap leading-relaxed">
+                      {selectedInquiry.notes}
+                    </p>
+                  </div>
                 )}
               </div>
 
